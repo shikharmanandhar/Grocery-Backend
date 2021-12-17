@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs/dist/bcrypt");
 const jwt= require("jsonwebtoken");
 const { application } = require("express");
 
-const {appendFile}=require("fs");
+const {appendFile, rmSync}=require("fs");
 const auth= require("../auth/auth")
 
 
@@ -76,6 +76,7 @@ router.post("/customer/login",function(req,res){
             }
             //now lets genereate token
             //jsonwebtoken
+            //jwt.sign helps to create token- 
             const token=jwt.sign({custId:customerData._id}, "anysecretkey");
             res.json({token:token, message:"sucess"});
         })
@@ -94,9 +95,7 @@ router.post("/customer/login",function(req,res){
 })
 
 
-router.delete("/test",auth.verifyCustomer,function(req,res){
-    res.json({msg:"deleted"})
-})
+
 
 router.get("/profile", auth.verifyCustomer,function(req,res){
     Customer.findOne({_id:req.customerInfo._id})
@@ -104,6 +103,43 @@ router.get("/profile", auth.verifyCustomer,function(req,res){
 
 router.put("/update",auth.verifyCustomer,function(req,res){
     
+})
+
+//profile update of the customer
+router.put("/customer/profile/update", auth.verifyCustomer,function(req,res){
+    // console.log(req.customerInfo._id);
+    // console.log(req.customerInfo.contact);
+    // res.json(req.customerInfo);
+    const cid=req.customerInfo._id;
+    const contact= req.body.contact;
+    Customer.updateOne({_id:cid},{contact:contact})
+    .then(function(){
+        res.json({msg:"Profile update"})
+    })
+    .catch(function(){
+        res.json({msg:"something went wrong"})
+    });
+})
+
+// to delete customer by itsself
+router.delete("/customer/profile/delete",auth.verifyCustomer,function(req,res){
+    const cid=req.customerInfo._id;
+    Customer.findByIdAndDelete(cid)
+    .then(function(){
+        res.json({msg:"Customer deleted"})
+    })
+    .catch(function(){
+        res.json({msg:"something went wrong! Try again"});
+    })
+})
+
+
+// to delete customer by admin
+router.delete("/customer/profile/admin/delete",auth.verifyAdmin,function(req,res){
+    const cid=req.body.id;
+    Customer.deleteOne({_id:cid})
+    .then()
+    .catch()
 })
 
 module.exports = router;
