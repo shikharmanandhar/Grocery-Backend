@@ -16,6 +16,9 @@ const Customer=mongoose.model("Customer",{
     },
     address:{
         type:String
+    },
+    uimage:{
+        type:String
     }
 })
 module.exports = Customer

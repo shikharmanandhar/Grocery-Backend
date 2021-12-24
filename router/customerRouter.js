@@ -7,12 +7,17 @@ const jwt= require("jsonwebtoken");
 const { application } = require("express");
 
 const {appendFile, rmSync}=require("fs");
-const auth= require("../auth/auth")
+const auth= require("../auth/auth");
+const uploadimg=require("../file/fileupload")
 
 
 
 
-router.post("/customer/register", function (req, res) {
+router.post("/customer/register" , uploadimg.single('uimage'), function (req, res) {
+    if(req.file==undefined){
+        return res.json({msg:"invalid!!!!!!"})
+    }
+    
     const username = req.body.username;
 
     Customer.findOne({ username: username })
@@ -23,13 +28,14 @@ router.post("/customer/register", function (req, res) {
                 })
                 return;
             }
+            
             //now this place is for the user which is not availabel in db
 
             const password = req.body.password;
             const usertype = req.body.usertype;
             const contact = req.body.contact;
             const address = req.body.address;
-
+        
 
             bcryptjs.hash(password, 10, function (e, hashed_value) {
                 const data = new Customer({
@@ -38,6 +44,7 @@ router.post("/customer/register", function (req, res) {
                     usertype: usertype,
                     contact: contact,
                     address: address,
+                    uimage:req.file.filename
                 })
                 data.save()
                     .then(function () {
@@ -135,12 +142,20 @@ router.delete("/customer/profile/delete",auth.verifyCustomer,function(req,res){
 
 
 // to delete customer by admin
-router.delete("/customer/profile/admin/delete",auth.verifyAdmin,function(req,res){
-    const cid=req.body.id;
-    Customer.deleteOne({_id:cid})
-    .then()
-    .catch()
+// router.delete("/customer/profile/admin/delete",auth.verifyAdmin,function(req,res){
+//     const cid=req.body.id;
+//     Customer.deleteOne({_id:cid})
+//     .then()
+//     .catch()
+    
+// })
+
+router.post("/product/imgupload",uploadimg.single('myimages'),function(req,res){
+if(req.file==undefined){
+    return res.json({msg:"invalid!!!!!!"})
+}
 })
+
 
 module.exports = router;
 
