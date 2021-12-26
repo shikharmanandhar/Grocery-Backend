@@ -10,6 +10,9 @@ const Vendor=mongoose.model("Vendor",{
     },
     usertype:{
         type:String
+    },
+    vimage:{
+        type:String
     }
 })
 module.exports = Vendor

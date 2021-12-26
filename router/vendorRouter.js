@@ -7,9 +7,16 @@ const jwt= require("jsonwebtoken");
 
 const {appendFile}=require("fs");
 const auth= require("../auth/auth")
+const uploadimg=require("../file/fileupload")
 
 
-router.post("/vendor/register", function(req,res){
+router.post("/vendor/register",uploadimg.single('vimage'), function(req,res){
+
+    if(req.file==undefined){
+        return res.json({msg:"invalid!!!!!!"})
+    }
+    
+
     const username = req.body.username;
     
     Vendor.findOne({username:username})
@@ -29,6 +36,7 @@ router.post("/vendor/register", function(req,res){
                 username:username,
                 password:hashed_value,
                 usertype: usertype,
+                vimage:req.file.filename
             })
             data.save()
             .then(function(){
@@ -46,6 +54,9 @@ router.post("/vendor/register", function(req,res){
 
 //login route for vendor
 router.post("/vendor/login",function(req,res){
+    
+    
+
     const username= req.body.username;
     Vendor.findOne({
         username:username
