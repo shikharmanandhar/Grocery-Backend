@@ -8,8 +8,9 @@ app.use(express.urlencoded({extended:true}))
 require("./database/database");
 
 const CustomerRoute=require("./router/customerRouter");
-const VendorRoute=require("./router/vendorRouter")
-app.use(CustomerRoute,VendorRoute);
+const VendorRoute=require("./router/vendorRouter");
+const ProductRoute=require("./router/productRouter")
+app.use(CustomerRoute,VendorRoute,ProductRoute);
 
 
 

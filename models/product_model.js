@@ -8,6 +8,9 @@ const Product=mongoose.model("Product",{
     pPrice:{
         type:String
     },
+    pdescription:{
+        type:String
+    },
     pPmage:{
         type:String
     }
