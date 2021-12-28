@@ -5,28 +5,28 @@ const Vendor = require("../models/vendor_model");
 const uploadimg=require("../file/fileupload")
 
 
-router.post("/customer/register" , uploadimg.single('uimage'), function (req, res) {
+router.post("/product/add" , uploadimg.single('uimage'), function (req, res) {
     if(req.file==undefined){
         return res.json({msg:"invalid!!!!!!"})
     }
     
-    const username = req.body.username;
+    const pName = req.body.pName;
 
-    Customer.findOne({ username: username })
-        .then(function (customerData) {
-            if (customerData != null) {
+    Produxt.findOne({ pName: pName })
+        .then(function (productData) {
+            if (productData != null) {
                 res.json({
-                    message: "User Already Exists!"
+                    message: "Product Already Exists!"
                 })
                 return;
             }
             
             //now this place is for the user which is not availabel in db
 
-            const password = req.body.password;
-            const usertype = req.body.usertype;
-            const contact = req.body.contact;
-            const address = req.body.address;
+            const pPrice = req.body.pPrice;
+            const pDescription = req.body.pDescription;
+            const pImage = req.body.pImage;
+            
         
 
             bcryptjs.hash(password, 10, function (e, hashed_value) {

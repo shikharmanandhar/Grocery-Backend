@@ -1,17 +1,26 @@
 const mongoose= require("mongoose");
 
 
-const Product=mongoose.model("Product",{
+
+const Product=new mongoose.Schema("Product",{
     pName:{
-        type:String
+        type:String,
+        required: true
     },
     pPrice:{
+        type:String,
+        required:true
+    },
+    pDescription:{
         type:String
     },
-    pdescription:{
+    pImage:{
         type:String
     },
-    pPmage:{
+    pQuantigy:{
+        type:Number
+    },
+    vendorId:{
         type:String
     }
 })
