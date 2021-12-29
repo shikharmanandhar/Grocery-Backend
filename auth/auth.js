@@ -31,7 +31,7 @@ module.exports.verifyVendor=function(req,res,next){
     try{
     const token=req.headers.authorization.split(" ")[1];
     // console.log(token);
-    const cdata=jwt.verify(token,"anysecretkey");
+    const vdata=jwt.verify(token,"anysecretkey");
     Vendor.findOne({_id: vdata.vendorId}).then(function(venData){
         // console.log(custData);
         req.vendorInfo=venData;
@@ -43,6 +43,7 @@ module.exports.verifyVendor=function(req,res,next){
     })
 }
 catch(e){
+    console.log(e)
     res.json({error:e})
 }
 }

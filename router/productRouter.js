@@ -1,52 +1,57 @@
 const express= require("express");
 const router= new express.Router();
-const Vendor = require("../models/vendor_model");
+const Product = require("../models/product_model");
+const uploadimg=require("../file/fileupload");
+const auth= require("../auth/auth")
 
-const uploadimg=require("../file/fileupload")
 
 
-router.post("/product/add" , uploadimg.single('uimage'), function (req, res) {
-    if(req.file==undefined){
-        return res.json({msg:"invalid!!!!!!"})
-    }
-    
-    const pName = req.body.pName;
+router.post("/product/insert",auth.verifyVendor,function(req,res){
+    const pName= req.body.pName;
+    const pPrice=req.body.pPrice;
+    const pDescription=req.body.pDescription;
+    // const pQuantity=req.body.pQuantity;
+    const vendorId= req.vendorInfo._id;
 
-    Produxt.findOne({ pName: pName })
-        .then(function (productData) {
-            if (productData != null) {
-                res.json({
-                    message: "Product Already Exists!"
-                })
-                return;
-            }
-            
-            //now this place is for the user which is not availabel in db
+    const data= new Product({
+        pName : pName,
+        pPrice : pPrice,
+        pDescription : pDescription,
+        // pQuantity : pQuantity,
+        vendorId : vendorId,
+    })
+    data.save()
+    .then(
+        function(){
+            res.json({message:"Product Inserted!"})
+        }
+    ).catch(function(){
+        res.json({message:"Something went wrong"})
+    })
 
-            const pPrice = req.body.pPrice;
-            const pDescription = req.body.pDescription;
-            const pImage = req.body.pImage;
-            
-        
-
-            bcryptjs.hash(password, 10, function (e, hashed_value) {
-                const data = new Customer({
-                    username: username,
-                    password: hashed_value,
-                    usertype: usertype,
-                    contact: contact,
-                    address: address,
-                    uimage:req.file.filename
-                })
-                data.save()
-                    .then(function () {
-                        res.json({ message: "Registered Success" });
-
-                    })
-                    .catch(function (e) {
-                        res.json(e)
-                    })
-            });
-
-        })
 })
+
+
+router.put('/product/update', auth.verifyVendor,function(req,res){
+const pid=req.body.pid;
+const pName= req.body.pName;
+    const pPrice=req.body.pPrice;
+    const pDescription=req.body.pDescription;
+    // const pQuantity=req.body.pQuantity;
+    
+  Product.updateOne({_id:pid},{pName:pName,pPrice:pPrice,pDescription:pDescription})
+  .then(
+    function(){
+        res.json({message:"Product updated!"})
+    }
+  )
+  .catch(
+    function(){
+        res.json({message:"something went wrong!"})
+    }
+  )  
+})
+
+
+
+module.exports=router;
