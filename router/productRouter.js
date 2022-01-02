@@ -78,7 +78,7 @@ router.get('/product/all', function(req,res){
     })
     .catch(function(){
         res.json({
-            message:"something went wrong"
+            message:"something went wrong ok"
         }
         )
     })
