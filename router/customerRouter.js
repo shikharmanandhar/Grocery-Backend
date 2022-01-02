@@ -152,7 +152,7 @@ router.delete("/customer/profile/delete",auth.verifyCustomer,function(req,res){
 
 router.post("/product/imgupload",uploadimg.single('myimages'),function(req,res){
 if(req.file==undefined){
-    return res.json({msg:"invalid!!!!!!"})
+    return res.json({msg:"invalid!!!!!!!"})
 }
 })
 
