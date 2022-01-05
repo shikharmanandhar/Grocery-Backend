@@ -5,6 +5,9 @@ const Customer=mongoose.model("Customer",{
     username:{
         type:String
     },
+    email:{
+        type:String
+    },
     password:{
         type:String
     },
