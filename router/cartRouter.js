@@ -11,7 +11,7 @@ router.post("/cart/add",auth.verifyVendor,function(req,res){
     const customerId= req.customerId._id;
     const items= req.body.items;
 
-    const data= new Product({
+    const Cart= new Cart({
         pName : pName,
         pPrice : pPrice,
         pDescription : pDescription,

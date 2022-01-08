@@ -8,15 +8,16 @@ const { application } = require("express");
 
 const {appendFile, rmSync}=require("fs");
 const auth= require("../auth/auth");
-const uploadimg=require("../file/fileupload")
+const uploadimg=require("../file/fileupload");
+const sendemail=require("../email");
 
 
 
 
 router.post("/customer/register" , uploadimg.single('uimage'), function (req, res) {
-    if(req.file==undefined){
-        return res.json({msg:"invalid!!!!!!"})
-    }
+    // if(req.file==undefined){
+    //     return res.json({msg:"invalid!!!!!!"})
+    // }
     
     const username = req.body.username;
 
@@ -30,7 +31,7 @@ router.post("/customer/register" , uploadimg.single('uimage'), function (req, re
             }
             
             //now this place is for the user which is not availabel in db
-
+            const email= req.body.email;
             const password = req.body.password;
             const usertype = req.body.usertype;
             const contact = req.body.contact;
@@ -40,11 +41,12 @@ router.post("/customer/register" , uploadimg.single('uimage'), function (req, re
             bcryptjs.hash(password, 10, function (e, hashed_value) {
                 const data = new Customer({
                     username: username,
+                    email:email,
                     password: hashed_value,
                     usertype: usertype,
                     contact: contact,
                     address: address,
-                    uimage:req.file.filename
+                    // uimage:req.file.filename
                 })
                 data.save()
                     .then(function () {
@@ -100,6 +102,41 @@ router.post("/customer/login",function(req,res){
 
     })
 })
+
+router.post("/customer/passGenLink", function(req, res) {
+    const email = req.body.email;
+    const newPass = req.body.newPass;
+    //confirm password
+    Customer.findOne({email: email}).then(function(customerData) {
+        if(customerData==null) {
+            return res.json({message: "Customer with that email address does not exist."});
+        }
+        const token = jwt.sign({custId: customerData._id}, "resetPassKey", {expiresIn: "5m"});
+        const link = `localhost:90/customer/resetPass/${token}/${newPass}`;
+        sendemail(email, "Password Reset Link", link);
+        res.json({message: link});
+    });
+});
+router.put("/customer/resetPass/:resetToken/:newPass", function(req, res) {
+    try{
+        const token = req.params.resetToken;
+        const customerData = jwt.verify(token, "resetPassKey");          
+        // console.log("entered"); 
+        bcryptjs.hash(req.params.newPass, 10, (e, hashed_pass)=> {           
+            // console.log("entered bcryptjs"); 
+            Customer.updateOne({_id: customerData.custId}, {password: hashed_pass})
+            .then(function() {
+                res.json({message: "Your password has been reset."})
+            })
+            .catch(function(e) {
+                res.json({error: e});
+            });
+        });        
+    }
+    catch(e) {
+        res.json({error: e});
+    }
+});
 
 
 
