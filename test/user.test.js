@@ -23,7 +23,7 @@ describe('User Schema test anything', () => {
 };
 return User.create(Userdata)
     .then((pro_ret) => {
-    expect(pro_ret.name).toEqual('Gauri');
+    expect(pro_ret.name).toEqual('shikhar');
     expect(pro_ret.email).toEqual('gauri@gmail.com');
     //expect(pro_ret.password).toEqual('gauri@123');
     expect(pro_ret.avatar.public_id).toEqual(
