@@ -13,7 +13,7 @@ afterAll(async () => {
 describe('User Schema test anything', () => {
     it('Add User testing anything', () => {
         const Userdata = {
-            'name': 'Gauri',
+            'name': 'shikhar',
             'email': 'gauri@gmail.com',
             'password':'gauri@123',
             'avatar':{
