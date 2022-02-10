@@ -14,7 +14,7 @@ describe('User Schema test anything', () => {
     it('Add User testing anything', () => {
         const Userdata = {
             'name': 'shikhar',
-            'email': 'gauri@gmail.com',
+            'email': 'shikhar@gmail.com',
             'password':'gauri@123',
             'avatar':{
             'public_id':"avatars/cby15nvciwchbymvciug",
