@@ -13,7 +13,7 @@ afterAll(async () => {
 describe('Product Schema test anything', () => {
     it('Add Product testing anything', () => {
         const Productdata = {
-            'name': 'thakali',
+            'name': 'chicken',
             'description': 'Fresh meat',
             'price':200,
             'ratings':2,
