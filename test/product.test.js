@@ -25,7 +25,7 @@ describe('Product Schema test anything', () => {
             'numOfReviews':1,
             'reviews':{
                 'user':'6204ad701ac4b68de5806105',
-                'name':'Gauri',
+                'name':'shikhar',
                 'rating':2,
                 'comment':'Liked the product'
             },
