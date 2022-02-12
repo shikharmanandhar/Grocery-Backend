@@ -27,7 +27,7 @@ describe('Product Schema test anything', () => {
                 'user':'6204ad701ac4b68de5806105',
                 'name':'shikhar',
                 'rating':2,
-                'comment':'Liked the product'
+                'comment':'love the product'
             },
             'user':'6204ad701ac4b68de5806105'
 };
