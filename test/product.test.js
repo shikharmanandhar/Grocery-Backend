@@ -33,7 +33,7 @@ describe('Product Schema test anything', () => {
 };
 return Product.create(Productdata)
     .then((pro_ret) => {
-        expect(pro_ret.name).toEqual('thakali');
+        expect(pro_ret.name).toEqual('kfc');
     });
 });
     it('to test the delete Product is working or not', async () => {
