@@ -46,7 +46,7 @@ return Order.create(Orderdata)
             "bhaktapur"
             );
         expect(pro_ret.shippingInfo.city).toEqual(
-            "New Baneshwor"
+            "kamalvinayak"
             );
         expect(pro_ret.shippingInfo.state).toEqual(
             "Bagmati"
