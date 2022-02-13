@@ -14,7 +14,7 @@ describe('Order Schema test anything', () => {
     it('Add Order testing anything', () => {
         const Orderdata = {
             'shippingInfo':{
-                'address':'Kathmandu',
+                'address':'bhaktapur',
                 'city':'New Baneshwor',
                 'state':'Bagmati',
                 'country':'Nepal',
