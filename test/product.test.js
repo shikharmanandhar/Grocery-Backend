@@ -21,7 +21,7 @@ describe('Product Schema test anything', () => {
             'public_id':"products/wg6ei74p4cptclpbtvyx",
             'url':"https://res.cloudinary.com/dopscegcx/image/upload/v1644473829/products..."},
             'category':'KFC',
-            'stock':20,
+            'stock':30,
             'numOfReviews':1,
             'reviews':{
                 'user':'6204ad701ac4b68de5806105',
