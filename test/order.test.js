@@ -43,7 +43,7 @@ describe('Order Schema test anything', () => {
 return Order.create(Orderdata)
     .then((pro_ret) => {
         expect(pro_ret.shippingInfo.address).toEqual(
-            "Kathmandu"
+            "bhaktapur"
             );
         expect(pro_ret.shippingInfo.city).toEqual(
             "New Baneshwor"
