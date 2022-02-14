@@ -49,7 +49,7 @@ return Order.create(Orderdata)
             "kamalvinayak"
             );
         expect(pro_ret.shippingInfo.state).toEqual(
-            "Bagmati"
+            "bagmati"
             );
         expect(pro_ret.shippingInfo.country).toEqual(
             "Nepal"
