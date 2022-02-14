@@ -16,7 +16,7 @@ describe('Order Schema test anything', () => {
             'shippingInfo':{
                 'address':'bhaktapur',
                 'city':'kamalvinayak',
-                'state':'Bagmati',
+                'state':'bagmati',
                 'country':'Nepal',
                 'pinCode':44600,
                 'phoneNo':9876543210
