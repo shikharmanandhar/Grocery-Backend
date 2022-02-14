@@ -15,7 +15,7 @@ describe('Order Schema test anything', () => {
         const Orderdata = {
             'shippingInfo':{
                 'address':'bhaktapur',
-                'city':'New Baneshwor',
+                'city':'kamalvinayak',
                 'state':'Bagmati',
                 'country':'Nepal',
                 'pinCode':44600,
