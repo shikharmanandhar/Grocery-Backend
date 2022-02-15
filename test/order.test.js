@@ -19,7 +19,7 @@ describe('Order Schema test anything', () => {
                 'state':'bagmati',
                 'country':'Nepal',
                 'pinCode':44600,
-                'phoneNo':9876543210
+                'phoneNo':9869496364
             },
             'orderItems':{
                 'name':'KFC',
