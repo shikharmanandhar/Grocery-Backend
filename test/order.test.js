@@ -58,7 +58,7 @@ return Order.create(Orderdata)
             44600
             );
         expect(pro_ret.shippingInfo.phoneNo).toEqual(
-            9876543210
+            9869496394
             );
         // expect(pro_ret.orderItems.name).toEqual(
         //     "Chicken"
